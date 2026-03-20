@@ -1,0 +1,108 @@
+# =========================
+# Dependencies
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# =========================
+# Environment variables
+# =========================
+.env
+.env.*
+!.env.example
+
+# =========================
+# Logs
+# =========================
+logs/
+*.log
+
+# =========================
+# OS / Editor files
+# =========================
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+
+# =========================
+# Build / Output
+# =========================
+dist/
+build/
+out/
+
+# =========================
+# Temporary files
+# =========================
+tmp/
+temp/
+*.tmp
+
+# =========================
+# Testing
+# =========================
+coverage/
+.nyc_output/
+
+# =========================
+# Cache
+# =========================
+.cache/
+.parcel-cache/
+
+# =========================
+# TypeScript (if used)
+# =========================
+*.tsbuildinfo
+
+# =========================
+# Uploads (important for eCommerce)
+# =========================
+uploads/
+public/uploads/
+storage/
+*.csv
+*.xlsx
+
+# =========================
+# Database
+# =========================
+*.sqlite
+*.db
+*.sqlite3
+
+# =========================
+# Docker
+# =========================
+docker-compose.override.yml
+
+# =========================
+# Misc
+# =========================
+*.pid
+*.seed
+*.tgz
+
+# =========================
+# Secrets / Keys
+# =========================
+*.pem
+*.key
+
+# =========================
+# Optional: lock files (choose one strategy)
+# =========================
+# Keep ONE of these depending on your team:
+
+# If using npm (recommended to keep):
+# package-lock.json
+
+# If using yarn:
+# yarn.lock
+
+# If using pnpm:
+# pnpm-lock.yaml
