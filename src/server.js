@@ -2,6 +2,7 @@ import dotenv from 'dotenv'
 import express from 'express'
 import { connectDB, disconnectDB } from '../config/config_db.js'
 import authRoutes from '../routes/authRoutes.js'
+import productRoutes from '../routes/productRoutes.js'
 import cors from 'cors'
 import cookieParser from 'cookie-parser'
 dotenv.config()
@@ -24,6 +25,7 @@ app.use(cookieParser())
 app.use(express.json())
 const PORT = process.env.PORT
 app.use('/api/auth', authRoutes)
+app.use('/api/products', productRoutes)
 connectDB()
     .then(() => {
         app.listen(PORT, () => {

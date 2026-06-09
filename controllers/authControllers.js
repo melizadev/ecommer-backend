@@ -77,7 +77,7 @@ export const loginUser = async (req, res) => {
         if (!JWT_SECRET_KEY) {
             return res
                 .status(500)
-                .json({ message: 'Server configuration error' })
+                .json({ message: 'ddddd Server configuration error' })
         }
         const { email, password } = loginSchema.parse(req.body)
         const user = await userModel.findOne({ email })
@@ -115,8 +115,17 @@ export const loginUser = async (req, res) => {
             .status(200)
             .json(userData)
     } catch (e) {
-        console.error('Login error:', e)
-        res.status(500).json({ message: 'Error logging in user' })
+        if (e instanceof ZodError) {
+            return res.status(400).json({
+                errors: e.errors,
+            })
+        }
+
+        console.error(e)
+
+        res.status(500).json({
+            message: 'Internal server error',
+        })
     }
 }
 
