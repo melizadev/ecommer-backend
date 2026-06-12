@@ -3,25 +3,21 @@ import ProductSchema from '../models/productModel.js'
 
 export const createProduct = async (req, res) => {
     try {
-        const validation = productSchema.safeParse(req.body)
-
-        if (!validation.success) {
-            return res.status(400).json({
-                message: 'Datos inválidos',
-                errors: validation.error.errors,
-            })
-        }
-
-        const product = await ProductSchema.create(validation.data)
+        const data = productSchema.parse(req.body)
+        console.log(data)
+        const product = await ProductSchema.create(data)
 
         res.status(201).json({
             message: 'Producto creado correctamente',
             product,
         })
     } catch (error) {
-        res.status(500).json({
-            message: 'Error al crear producto',
-            error: error.message,
+        console.log(error)
+
+        res.status(400).json({
+            message: error.message,
+            code: error.code,
+            keyValue: error.keyValue,
         })
     }
 }
@@ -92,9 +88,12 @@ export const updateProduct = async (req, res) => {
             product: updatedProduct,
         })
     } catch (error) {
-        res.status(500).json({
-            message: 'Error al actualizar producto',
-            error: error.message,
+        console.log(error)
+
+        res.status(400).json({
+            message: error.message,
+            code: error.code,
+            keyValue: error.keyValue,
         })
     }
 }
