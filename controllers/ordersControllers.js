@@ -1,5 +1,5 @@
 import OrderModel from '../models/orderModel.js'
-import CartModel from '../models/CartModel.js'
+import CartModel from '../models/cartModel.js'
 import ProductModel from '../models/productModel.js'
 
 export const checkout = async (req, res) => {
