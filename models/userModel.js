@@ -1,5 +1,4 @@
 import mongoose from 'mongoose'
-//define user schema for mongoDB
 const userSchema = new mongoose.Schema({
     email: {
         type: String,
@@ -8,7 +7,7 @@ const userSchema = new mongoose.Schema({
         trim: true,
         minLength: 6,
         maxLength: 254,
-        match: [/^\S+@\S+\.\S+$/, 'Email inválido'],
+        match: [/^\S+@\S+\.\S+$/, 'invalid email'],
     },
     password: {
         type: String,
@@ -26,7 +25,7 @@ const userSchema = new mongoose.Schema({
         maxLength: 30,
         match: [
             /^[a-zA-Z0-9._-]+$/,
-            'Username solo puede contener letras, números, ., _ y -',
+            'Username can just contain letters, numbers, ., _ and -',
         ],
     },
     isAdmin: {

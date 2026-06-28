@@ -4,16 +4,13 @@ import ProductSchema from '../models/productModel.js'
 export const createProduct = async (req, res) => {
     try {
         const data = productSchema.parse(req.body)
-        console.log(data)
         const product = await ProductSchema.create(data)
 
         res.status(201).json({
-            message: 'Producto creado correctamente',
+            message: 'Product created correctly',
             product,
         })
     } catch (error) {
-        console.log(error)
-
         res.status(400).json({
             message: error.message,
             code: error.code,
@@ -29,8 +26,7 @@ export const getProducts = async (req, res) => {
         res.status(200).json(products)
     } catch (error) {
         res.status(500).json({
-            message: 'Error al obtener productos',
-            error: error.message,
+            message: 'Error obtaining products',
         })
     }
 }
@@ -43,15 +39,14 @@ export const getProductById = async (req, res) => {
 
         if (!product) {
             return res.status(404).json({
-                message: 'Producto no encontrado',
+                message: 'Product not found',
             })
         }
 
         res.status(200).json(product)
     } catch (error) {
         res.status(500).json({
-            message: 'Error al obtener producto',
-            error: error.message,
+            message: 'Error obtaining product',
         })
     }
 }
@@ -64,7 +59,7 @@ export const updateProduct = async (req, res) => {
 
         if (!validation.success) {
             return res.status(400).json({
-                message: 'Datos inválidos',
+                message: 'Invalid data',
                 errors: validation.error.errors,
             })
         }
@@ -79,19 +74,17 @@ export const updateProduct = async (req, res) => {
 
         if (!updatedProduct) {
             return res.status(404).json({
-                message: 'Producto no encontrado',
+                message: 'Product not found',
             })
         }
 
         res.status(200).json({
-            message: 'Producto actualizado',
+            message: 'Updated product',
             product: updatedProduct,
         })
     } catch (error) {
-        console.log(error)
-
         res.status(400).json({
-            message: error.message,
+            message: 'Server error updating product',
             code: error.code,
             keyValue: error.keyValue,
         })
@@ -106,17 +99,16 @@ export const deleteProduct = async (req, res) => {
 
         if (!deletedProduct) {
             return res.status(404).json({
-                message: 'Producto no encontrado',
+                message: 'Product not found',
             })
         }
 
         res.status(200).json({
-            message: 'Producto eliminado correctamente',
+            message: 'Product deleted correctly',
         })
     } catch (error) {
         res.status(500).json({
-            message: 'Error al eliminar producto',
-            error: error.message,
+            message: 'Error deleting product',
         })
     }
 }

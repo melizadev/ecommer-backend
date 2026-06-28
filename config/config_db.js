@@ -10,7 +10,6 @@ export const connectDB = async () => {
             .replace('<db_password>', process.env.MONGO_DB_PASSWORD)
             .replace('<db_name>', process.env.MONGO_DB_NAME)
         await mongoose.connect(dbUrl)
-        console.log(dbUrl)
     } catch (error) {
         console.error('Error connecting to MongoDB:', error)
     }

@@ -3,28 +3,19 @@ import {
     registerUser,
     getUserProfile,
     loginUser,
+    logoutUser,
 } from '../controllers/authControllers.js'
+import { verifyToken } from '../middlewares/verifyToken.js'
+
 const router = express.Router()
+
 router.get('/', (req, res) => {
-    res.json({ messsage: 'contectado al backend' })
+    res.json({ message: 'connected to the backend' })
 })
 
 router.post('/register', registerUser)
-
 router.post('/login', loginUser)
-
-router.get('/profile', getUserProfile)
-
-router.post('/logout', (req, res) => {
-    console.log('You do a petition to logout')
-    res.json({ message: 'Login successful' })
-})
-
-router.get('/profile', getUserProfile)
-
-router.post('/logout', (req, res) => {
-    console.log('You do a petition to logout')
-    res.json({ message: 'Logout successful' })
-})
+router.post('/logout', logoutUser)
+router.get('/profile', verifyToken, getUserProfile)
 
 export default router
