@@ -1,10 +1,10 @@
 import { productSchema } from '../schemas/productSchema.js'
-import ProductSchema from '../models/productModel.js'
+import ProductModel from '../models/productModel.js'
 
 export const createProduct = async (req, res) => {
     try {
         const data = productSchema.parse(req.body)
-        const product = await ProductSchema.create(data)
+        const product = await ProductModel.create(data)
 
         res.status(201).json({
             message: 'Product created correctly',
@@ -21,7 +21,7 @@ export const createProduct = async (req, res) => {
 
 export const getProducts = async (req, res) => {
     try {
-        const products = await ProductSchema.find()
+        const products = await ProductModel.find()
 
         res.status(200).json(products)
     } catch (error) {
@@ -35,7 +35,7 @@ export const getProductById = async (req, res) => {
     try {
         const { id } = req.params
 
-        const product = await ProductSchema.findById(id)
+        const product = await ProductModel.findById(id)
 
         if (!product) {
             return res.status(404).json({
@@ -64,7 +64,7 @@ export const updateProduct = async (req, res) => {
             })
         }
 
-        const updatedProduct = await ProductSchema.findByIdAndUpdate(
+        const updatedProduct = await ProductModel.findByIdAndUpdate(
             id,
             validation.data,
             {
@@ -95,7 +95,7 @@ export const deleteProduct = async (req, res) => {
     try {
         const { id } = req.params
 
-        const deletedProduct = await ProductSchema.findByIdAndDelete(id)
+        const deletedProduct = await ProductModel.findByIdAndDelete(id)
 
         if (!deletedProduct) {
             return res.status(404).json({

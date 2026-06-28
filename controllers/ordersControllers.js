@@ -1,11 +1,11 @@
 import OrderModel from '../models/orderModel.js'
-import CartSchema from '../models/CartModel.js'
-import ProductSchema from '../models/productModel.js'
+import CartModel from '../models/CartModel.js'
+import ProductModel from '../models/productModel.js'
 
 export const checkout = async (req, res) => {
     try {
         const userId = req.user.userId
-        const cart = await CartSchema.findOne({ userId }).populate(
+        const cart = await CartModel.findOne({ userId }).populate(
             'products.productId'
         )
         if (!cart || cart.products.length === 0) {
@@ -86,7 +86,7 @@ export const payOrder = async (req, res) => {
     try {
         const { orderId } = req.params
         const userId = req.user.userId
-        const cart = await CartSchema.findOne({ userId }).populate(
+        const cart = await CartModel.findOne({ userId }).populate(
             'products.productId'
         )
         const order = await OrderModel.findOne({
@@ -118,7 +118,7 @@ export const payOrder = async (req, res) => {
             cart.products = []
         }
         for (const item of order.items) {
-            const product = await ProductSchema.findById(item.productId)
+            const product = await ProductModel.findById(item.productId)
 
             if (!product) {
                 return res.status(404).json({

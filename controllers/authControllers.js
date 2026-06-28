@@ -1,5 +1,5 @@
 import bcrypt from 'bcryptjs'
-import userModel from '../models/userModel.js'
+import UserModel from '../models/userModel.js'
 import { registerSchema, loginSchema } from '../schemas/authSchema.js'
 import jwt from 'jsonwebtoken'
 import { cookieOptions } from '../utils/coockieOptions.js'
@@ -9,17 +9,17 @@ export const registerUser = async (req, res) => {
     try {
         const { username, email, password } = registerSchema.parse(req.body)
 
-        const existingUser = await userModel.findOne({ email })
+        const existingUser = await UserModel.findOne({ email })
 
         if (existingUser) {
             return res.status(400).json({ message: 'User already exists' })
         }
 
-        const isFirstUser = (await userModel.countDocuments()) === 0
+        const isFirstUser = (await UserModel.countDocuments()) === 0
 
         const hashedPassword = await bcrypt.hash(password, 10)
 
-        const newUser = await userModel.create({
+        const newUser = await UserModel.create({
             username,
             email,
             password: hashedPassword,
@@ -45,7 +45,7 @@ export const getUserProfile = async (req, res) => {
     const token = req.cookies.token
     try {
         const decoded = jwt.verify(token, process.env.JWT_SECRET_KEY)
-        const user = await userModel.findById(decoded.userId)
+        const user = await UserModel.findById(decoded.userId)
         if (!user) {
             return res.status(404).json({ message: 'User not found' })
         }
@@ -70,7 +70,7 @@ export const loginUser = async (req, res) => {
                 .json({ message: 'Server configuration error' })
         }
         const { email, password } = loginSchema.parse(req.body)
-        const user = await userModel.findOne({ email })
+        const user = await UserModel.findOne({ email })
         if (!user) {
             return res
                 .status(400)

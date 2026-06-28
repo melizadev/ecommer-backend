@@ -88,7 +88,6 @@ export const addToCart = async (req, res) => {
 export const getCart = async (req, res) => {
     try {
         const userId = req.user.userId
-        console.log(userId)
         const cart = await CartModel.findOne({ userId }).populate(
             'products.productId'
         )
