@@ -1,6 +1,6 @@
 import mongoose from 'mongoose'
 
-const CartSchema = new mongoose.Schema(
+const cartSchema = new mongoose.Schema(
     {
         userId: {
             type: mongoose.Schema.Types.ObjectId,
