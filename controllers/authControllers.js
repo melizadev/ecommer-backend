@@ -56,7 +56,7 @@ export const getUserProfile = async (req, res) => {
             isAdmin: user.isAdmin,
         })
     } catch (e) {
-        res.status(4001).json({ message: 'Invalid token' })
+        res.status(401).json({ message: 'Invalid token' })
     }
 }
 
